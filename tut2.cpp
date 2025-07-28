@@ -78,6 +78,17 @@ long long processTestCase(const vector<pair<int, pair<int, string>>>& testData, 
 
 int main() {
     try {
+        cout << "=== Test Case 1 ===" << endl;
+        vector<pair<int, pair<int, string>>> testCase1 = {
+            {1, {10, "4"}},
+            {2, {2, "111"}},
+            {3, {10, "12"}},
+            {6, {4, "213"}}
+        };
+        
+        long long secret1 = processTestCase(testCase1, 3);
+        cout << "Secret (constant term): " << secret1 << endl << endl;
+        
         cout << "=== Test Case 2 ===" << endl;
         vector<pair<int, pair<int, string>>> testCase2 = {
             {1, {6, "13444211440455345511"}},
@@ -93,7 +104,11 @@ int main() {
         };
         
         long long secret2 = processTestCase(testCase2, 7);
-        cout << "Secret (constant term): " << secret2 << endl;
+        cout << "Secret (constant term): " << secret2 << endl << endl;
+        
+        cout << "=== Final Results ===" << endl;
+        cout << "Test Case 1 Secret: " << secret1 << endl;
+        cout << "Test Case 2 Secret: " << secret2 << endl;
         
     } catch (const exception& e) {
         cout << "Error: " << e.what() << endl;
