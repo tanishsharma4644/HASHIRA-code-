@@ -6,9 +6,9 @@
 
 using namespace std;
 
-long long convertToDecimal(const string& value, int base) {
-    long long result = 0;
-    long long power = 1;
+long double convertToDecimal(const string& value, int base) {
+    long double result = 0;
+    long double power = 1;
     
     for (int i = value.length() - 1; i >= 0; i--) {
         char c = value[i];
@@ -35,16 +35,16 @@ long long convertToDecimal(const string& value, int base) {
     return result;
 }
 
-double lagrangeInterpolation(const vector<pair<int, long long>>& points, int x = 0) {
-    double result = 0.0;
+long double lagrangeInterpolation(const vector<pair<int, long double>>& points, int x = 0) {
+    long double result = 0.0;
     int n = points.size();
     
     for (int i = 0; i < n; i++) {
-        double term = points[i].second;
+        long double term = points[i].second;
         
         for (int j = 0; j < n; j++) {
             if (i != j) {
-                term *= (double)(x - points[j].first) / (points[i].first - points[j].first);
+                term *= (long double)(x - points[j].first) / (points[i].first - points[j].first);
             }
         }
         
@@ -55,23 +55,23 @@ double lagrangeInterpolation(const vector<pair<int, long long>>& points, int x =
 }
 
 long long processTestCase(const vector<pair<int, pair<int, string>>>& testData, int k) {
-    vector<pair<int, long long>> points;
+    vector<pair<int, long double>> points;
     
     for (const auto& data : testData) {
         int x = data.first;
         int base = data.second.first;
         string value = data.second.second;
         
-        long long y = convertToDecimal(value, base);
+        long double y = convertToDecimal(value, base);
         points.push_back({x, y});
         
-        cout << "Point: (" << x << ", " << y << ") [decoded from base " << base << "]" << endl;
+        cout << "Point: (" << x << ", " << (long long)y << ") [decoded from base " << base << "]" << endl;
     }
     
     sort(points.begin(), points.end());
     points.resize(k);
     
-    double constant = lagrangeInterpolation(points, 0);
+    long double constant = lagrangeInterpolation(points, 0);
     
     return (long long)round(constant);
 }
